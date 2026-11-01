@@ -409,7 +409,7 @@ nav a:hover {
 }
 
 
-/* MOBILE */
+
 
 /* MOBILE */
 
@@ -1375,4 +1375,34 @@ background-clip: text;
 
 .register-terms input {
     accent-color: #a855f7;
+}
+/* FIX: Homepage mobile navigation */
+
+@media screen and (max-width: 900px) {
+
+    body:has(section.hero) header.header {
+        height: auto !important;
+        min-height: 75px;
+        padding: 15px !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    body:has(section.hero) header.header nav {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        order: 3;
+    }
+
+    body:has(section.hero) header.header nav a {
+        display: inline-block !important;
+        color: #c9bfdc !important;
+        font-size: 14px;
+    }
 }
