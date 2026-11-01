@@ -411,10 +411,29 @@ nav a:hover {
 
 /* MOBILE */
 
+/* MOBILE */
+
 @media (max-width: 900px) {
 
-    nav {
-        display: none;
+    body:has(.hero) .header {
+        height: auto;
+        min-height: 75px;
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    body:has(.hero) nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        order: 3;
+    }
+
+    body:has(.hero) nav a {
+        font-size: 14px;
     }
 
     .hero {
@@ -433,7 +452,6 @@ nav a:hover {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
 
 @media (max-width: 600px) {
 
