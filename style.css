@@ -463,11 +463,13 @@ nav a:hover {
         grid-template-columns: 1fr;
     }
 
-    .auth {
-        display: none;
-    }
+   body:has(section.hero) .auth {
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    order: 4;
 }
-
 @media (max-width: 900px) {
 
     .hero {
