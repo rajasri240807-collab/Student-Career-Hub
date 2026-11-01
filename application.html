@@ -1,0 +1,733 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | Student Career Hub</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* ===== SAME DASHBOARD THEME ===== */
+
+        .dashboard-page {
+            min-height: 100vh;
+            padding: 30px 6%;
+            color: #f8f7ff;
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    rgba(129, 66, 255, 0.22),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(236, 72, 153, 0.15),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #090b20,
+                    #15112f 55%,
+                    #0a1028
+                );
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ===== NAVBAR ===== */
+
+        .dashboard-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 18px 25px;
+            margin-bottom: 35px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 18px;
+            backdrop-filter: blur(15px);
+        }
+
+        .dashboard-logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .dashboard-logo span {
+            background: linear-gradient(90deg, #e58bff, #ff85c8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-nav a {
+            color: #d8d5f1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .dashboard-nav a:hover {
+            color: #f19bff;
+        }
+
+        .dashboard-logout {
+            padding: 10px 17px;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 145, 210, 0.6);
+            border-radius: 10px;
+            background: linear-gradient(
+                100deg,
+                rgba(135, 73, 255, 0.25),
+                rgba(236, 72, 153, 0.20)
+            );
+        }
+
+        /* ===== PAGE HEADING ===== */
+
+        .applications-heading {
+            margin-bottom: 30px;
+        }
+
+        .welcome-label {
+            color: #d4a4ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+
+        .applications-heading h1 {
+            color: #ffffff;
+            font-size: clamp(28px, 4vw, 43px);
+            line-height: 1.2;
+            margin: 0 0 17px;
+        }
+
+        .applications-heading h1 span {
+            background: linear-gradient(
+                90deg,
+                #f18cdd,
+                #a9a2ff,
+                #7bc8ff
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .applications-heading p {
+            color: #d0cde9;
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        /* ===== SUMMARY CARDS ===== */
+
+        .applications-summary {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 38px;
+        }
+
+        .summary-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 24px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            transition: 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(203, 151, 255, 0.55);
+            box-shadow: 0 12px 35px rgba(106, 65, 210, 0.16);
+        }
+
+        .summary-icon {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: 14px;
+            background: linear-gradient(
+                135deg,
+                rgba(139, 92, 246, 0.22),
+                rgba(236, 72, 153, 0.16)
+            );
+        }
+
+        .summary-card h3 {
+            color: #aaa7ca;
+            font-size: 14px;
+            margin: 0 0 8px;
+        }
+
+        .summary-number {
+            color: #ffffff;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        /* ===== APPLICATION SECTIONS ===== */
+
+        .applications-section {
+            margin-bottom: 38px;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            color: #ffffff;
+            font-size: 23px;
+            margin: 0 0 8px;
+        }
+
+        .section-heading p {
+            color: #aaa7d1;
+            font-size: 13px;
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        /* ===== APPLICATION CARDS ===== */
+
+        .applications-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .application-card {
+            padding: 24px;
+            min-width: 0;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+
+            transition: transform 0.3s,
+                        border-color 0.3s,
+                        box-shadow 0.3s;
+
+            animation: fadeIn 0.5s ease;
+        }
+
+        .application-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(203, 151, 255, 0.55);
+            box-shadow: 0 12px 35px rgba(106, 65, 210, 0.16);
+        }
+
+        .application-card h3 {
+            color: #eeeaff;
+            font-size: 17px;
+            line-height: 1.5;
+            margin: 0 0 10px;
+        }
+
+        .application-organization {
+            color: #aaa7ca;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0 0 18px;
+        }
+
+        .application-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 13px;
+            border-radius: 20px;
+
+            color: #a9f5c4;
+            background: rgba(45, 190, 105, 0.12);
+            border: 1px solid rgba(83, 220, 142, 0.20);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: #58dc91;
+            border-radius: 50%;
+        }
+
+        /* ===== EMPTY MESSAGE ===== */
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px 20px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 18px;
+
+            color: #aaa7ca;
+            line-height: 1.8;
+        }
+
+        .empty-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .empty-message h3 {
+            color: #eeeaff;
+            margin: 0 0 8px;
+        }
+
+        /* ===== BUTTONS ===== */
+
+        .applications-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 11px 18px;
+
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+
+            border: 1px solid rgba(255, 145, 210, 0.35);
+            border-radius: 10px;
+
+            background: linear-gradient(
+                100deg,
+                #8656ef,
+                #d957b4
+            );
+
+            box-shadow: 0 5px 20px rgba(157, 80, 222, 0.18);
+            transition: 0.3s;
+        }
+
+        .applications-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(157, 80, 222, 0.30);
+        }
+
+        .back-button-container {
+            text-align: center;
+            margin: 40px 0 10px;
+        }
+
+        /* ===== FOOTER ===== */
+
+        .dashboard-footer {
+            padding: 28px 0 5px;
+            text-align: center;
+            color: #8985ad;
+            font-size: 12px;
+        }
+
+        .dashboard-footer span {
+            color: #d78fff;
+        }
+
+        /* ===== ANIMATION ===== */
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+
+        @media (max-width: 850px) {
+            .applications-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-page {
+                padding: 18px 15px;
+            }
+
+            .dashboard-navbar {
+                padding: 18px;
+                margin-bottom: 25px;
+            }
+
+            .dashboard-logo {
+                font-size: 19px;
+            }
+
+            .dashboard-nav {
+                gap: 14px;
+            }
+
+            .dashboard-nav a {
+                font-size: 12px;
+            }
+
+            .applications-heading h1 {
+                font-size: 28px;
+            }
+
+            .applications-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2 {
+                font-size: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-page">
+
+    <!-- ===== NAVBAR ===== -->
+
+    <header class="dashboard-navbar">
+
+        <a href="index.html" class="dashboard-logo">
+            🎓 Student <span>Career Hub</span>
+        </a>
+
+        <nav class="dashboard-nav">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="internship.html">Internships</a>
+            <a href="resume.html">Resume Builder</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <!-- ===== PAGE HEADING ===== -->
+
+        <section class="applications-heading">
+
+            <div class="welcome-label">
+                YOUR CAREER • YOUR PROGRESS
+            </div>
+
+            <h1>
+                My <span>Applications</span> ✨
+            </h1>
+
+            <p>
+                Track your job and internship applications
+                in one place.<br>
+                Keep moving towards your dream career!
+            </p>
+
+        </section>
+
+        <!-- ===== APPLICATION COUNTS ===== -->
+
+        <section class="applications-summary">
+
+            <article class="summary-card">
+
+                <div class="summary-icon">💼</div>
+
+                <div>
+                    <h3>Applied Jobs</h3>
+                    <div class="summary-number" id="jobCount">0</div>
+                </div>
+
+            </article>
+
+            <article class="summary-card">
+
+                <div class="summary-icon">🎯</div>
+
+                <div>
+                    <h3>Internship Applications</h3>
+                    <div class="summary-number" id="internshipCount">0</div>
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- ===== JOB APPLICATIONS ===== -->
+
+        <section class="applications-section">
+
+            <div class="section-heading">
+                <h2>💼 My Job Applications</h2>
+                <p>Check the jobs you have applied for.</p>
+            </div>
+
+            <div class="applications-list" id="jobApplications"></div>
+
+        </section>
+
+        <!-- ===== INTERNSHIP APPLICATIONS ===== -->
+
+        <section class="applications-section">
+
+            <div class="section-heading">
+                <h2>🎓 My Internship Applications</h2>
+                <p>Review your submitted internship applications.</p>
+            </div>
+
+            <div class="applications-list" id="internshipApplications"></div>
+
+        </section>
+
+        <div class="back-button-container">
+            <a href="dashboard.html" class="applications-button">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+
+    <footer class="dashboard-footer">
+        <p>
+            © 2026 <span>Student Career Hub</span>.
+            Your future starts with your next step.
+        </p>
+    </footer>
+
+</div>
+
+<script>
+    // ===== GET APPLICATIONS FROM LOCAL STORAGE =====
+
+    const appliedJobs = JSON.parse(
+        localStorage.getItem("appliedJobs") || "[]"
+    );
+
+    const appliedInternships = JSON.parse(
+        localStorage.getItem("appliedInternships") || "[]"
+    );
+
+    // ===== UPDATE COUNTS =====
+
+    document.getElementById("jobCount").textContent =
+        appliedJobs.length;
+
+    document.getElementById("internshipCount").textContent =
+        appliedInternships.length;
+
+
+    // ===== JOB DETAILS =====
+    // IDs must match the IDs saved in jobs.html.
+
+    const jobDetails = {
+        java: {
+            title: "Java Developer",
+            organization: "Software Development Company"
+        },
+
+        fullstack: {
+            title: "Full Stack Developer",
+            organization: "Technology Company"
+        },
+
+        web: {
+            title: "Web Developer",
+            organization: "Web Solutions Company"
+        }
+    };
+
+
+    // ===== CREATE APPLICATION CARD =====
+
+    function createApplicationCard(titleText, organizationText) {
+
+        const card = document.createElement("article");
+        card.className = "application-card";
+
+        const title = document.createElement("h3");
+        title.textContent = titleText;
+
+        const organization = document.createElement("p");
+        organization.className = "application-organization";
+        organization.textContent = organizationText;
+
+        const status = document.createElement("span");
+        status.className = "application-status";
+
+        const dot = document.createElement("span");
+        dot.className = "status-dot";
+
+        const statusText = document.createTextNode("Applied");
+
+        status.appendChild(dot);
+        status.appendChild(statusText);
+
+        card.appendChild(title);
+        card.appendChild(organization);
+        card.appendChild(status);
+
+        return card;
+    }
+
+
+    // ===== EMPTY MESSAGE =====
+
+    function showEmptyMessage(
+        container,
+        icon,
+        message,
+        pageLink,
+        buttonText
+    ) {
+
+        const box = document.createElement("div");
+        box.className = "empty-message";
+
+        const emoji = document.createElement("div");
+        emoji.className = "empty-icon";
+        emoji.textContent = icon;
+
+        const heading = document.createElement("h3");
+        heading.textContent = message;
+
+        const description = document.createElement("p");
+        description.textContent =
+            "Your applications will appear here.";
+
+        const link = document.createElement("a");
+        link.className = "applications-button";
+        link.href = pageLink;
+        link.textContent = buttonText;
+
+        box.appendChild(emoji);
+        box.appendChild(heading);
+        box.appendChild(description);
+        box.appendChild(link);
+
+        container.appendChild(box);
+    }
+
+
+    // ===== DISPLAY JOB APPLICATIONS =====
+
+    const jobContainer =
+        document.getElementById("jobApplications");
+
+    if (appliedJobs.length === 0) {
+
+        showEmptyMessage(
+            jobContainer,
+            "💼",
+            "No job applications yet",
+            "jobs.html",
+            "Explore Jobs →"
+        );
+
+    } else {
+
+        appliedJobs.forEach(function(job) {
+
+            const details = jobDetails[job.id] || {
+                title: job.title || "Job Application",
+                organization:
+                    job.organization || "Organization not specified"
+            };
+
+            const card = createApplicationCard(
+                details.title,
+                details.organization
+            );
+
+            jobContainer.appendChild(card);
+        });
+    }
+
+
+    // ===== DISPLAY INTERNSHIP APPLICATIONS =====
+
+    const internshipContainer =
+        document.getElementById("internshipApplications");
+
+    if (appliedInternships.length === 0) {
+
+        showEmptyMessage(
+            internshipContainer,
+            "🎓",
+            "No internship applications yet",
+            "internship.html",
+            "Explore Internships →"
+        );
+
+    } else {
+
+        appliedInternships.forEach(function(internship) {
+
+            const card = createApplicationCard(
+                internship.title || "Internship Application",
+                internship.organization ||
+                    "Organization not specified"
+            );
+
+            internshipContainer.appendChild(card);
+        });
+    }
+</script>
+
+</body>
+</html>
+```

@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Builder | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .resume-page {
+            min-height: 100vh;
+            padding: 35px 6%;
+            color: white;
+        }
+
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .resume-header h1 span {
+            color: #d8a4ff;
+        }
+
+        .back-link {
+            color: #e6baff;
+            text-decoration: none;
+        }
+
+        .resume-layout {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+            align-items: start;
+        }
+
+        .resume-form,
+        .resume-preview {
+            padding: 25px;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .resume-form h2,
+        .resume-preview h2 {
+            color: #e6baff;
+            margin-bottom: 20px;
+        }
+
+        .resume-form label {
+            display: block;
+            margin: 15px 0 7px;
+            color: #e4d9f4;
+        }
+
+        .resume-form input,
+        .resume-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            border-radius: 9px;
+            background: #302344;
+            color: white;
+            -webkit-text-fill-color: white;
+            font: inherit;
+        }
+
+        .resume-form input::placeholder,
+        .resume-form textarea::placeholder {
+            color: #d0cde0;
+            -webkit-text-fill-color: #d0cde0;
+        }
+
+        .resume-form textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .resume-form input:focus,
+        .resume-form textarea:focus {
+            outline: 1px solid #d8a4ff;
+        }
+
+        .resume-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .resume-btn:hover {
+            opacity: 0.9;
+        }
+
+        .resume-preview {
+            background: white;
+            color: #25213b;
+            min-height: 500px;
+            overflow-wrap: anywhere;
+        }
+
+        .resume-preview h2 {
+            color: #7928a5;
+            margin-bottom: 8px;
+        }
+
+        .resume-preview h3 {
+            color: #7928a5;
+            border-bottom: 1px solid #d8c5e8;
+            padding-bottom: 5px;
+            margin: 22px 0 8px;
+        }
+
+        .resume-preview p {
+            margin: 7px 0;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .resume-preview .contact-line {
+            color: #625775;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .resume-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .resume-page {
+                padding: 25px 4%;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            .resume-preview,
+            .resume-preview * {
+                visibility: visible;
+            }
+
+            .resume-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+                color: black;
+                background: white;
+            }
+
+            .resume-preview h2,
+            .resume-preview h3 {
+                color: black;
+            }
+        }
+
+        /* Fix resume form text visibility */
+.resume-form input,
+.resume-form textarea {
+    background-color: #302344 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #f472b6 !important;
+    opacity: 1 !important;
+}
+
+/* Placeholder text */
+.resume-form input::placeholder,
+.resume-form textarea::placeholder {
+    color: #d0cde0 !important;
+    -webkit-text-fill-color: #d0cde0 !important;
+    opacity: 1 !important;
+}
+
+/* Text selection */
+.resume-form input::selection,
+.resume-form textarea::selection {
+    background-color: #a855f7 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Browser autofill */
+.resume-form input:-webkit-autofill,
+.resume-form input:-webkit-autofill:hover,
+.resume-form input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #302344 inset !important;
+    caret-color: #f472b6 !important;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+<main class="resume-page">
+
+    <header class="resume-header">
+        <h1>Resume <span>Builder ✨</span></h1>
+
+        <a href="dashboard.html" class="back-link">
+            ← Back to Dashboard
+        </a>
+    </header>
+
+    <div class="resume-layout">
+
+        <section class="resume-form">
+            <h2>Enter Your Details</h2>
+
+            <form id="resumeForm">
+
+                <label for="fullName">Full Name</label>
+                <input id="fullName" type="text"
+                       placeholder="Enter your full name" required>
+
+                <label for="email">Email Address</label>
+                <input id="email" type="email"
+                       placeholder="Enter your email" required>
+
+                <label for="phone">Phone Number</label>
+                <input id="phone" type="tel"
+                       placeholder="Enter your phone number">
+
+                <label for="education">Education</label>
+                <textarea id="education"
+                          placeholder="Degree, college, year"></textarea>
+
+                <label for="skills">Technical Skills</label>
+                <textarea id="skills"
+                          placeholder="Java, HTML, CSS, JavaScript, SQL"></textarea>
+
+                <label for="projects">Academic Projects</label>
+                <textarea id="projects"
+                          placeholder="Project name and a short description"></textarea>
+
+                <label for="objective">Career Objective</label>
+                <textarea id="objective"
+                          placeholder="Write your career objective"></textarea>
+
+                <button type="submit" class="resume-btn">
+                    Generate Resume ✨
+                </button>
+
+            </form>
+
+            <button type="button" id="printResume" class="resume-btn">
+                Print / Save as PDF
+            </button>
+        </section>
+
+        <section class="resume-preview" id="resumePreview">
+
+            <h2 id="previewName">Your Name</h2>
+
+            <p class="contact-line" id="previewContact">
+                Your email | Your phone
+            </p>
+
+            <h3>Career Objective</h3>
+            <p id="previewObjective">
+                Your career objective will appear here.
+            </p>
+
+            <h3>Education</h3>
+            <p id="previewEducation">
+                Your education details will appear here.
+            </p>
+
+            <h3>Technical Skills</h3>
+            <p id="previewSkills">
+                Your skills will appear here.
+            </p>
+
+            <h3>Academic Projects</h3>
+            <p id="previewProjects">
+                Your project details will appear here.
+            </p>
+
+        </section>
+
+    </div>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+    const resumeForm = document.getElementById("resumeForm");
+
+    // Require login before using the resume builder.
+    if (typeof isLoggedIn !== "function" || !isLoggedIn()) {
+        window.location.href = "login.html";
+    }
+
+    function displayResume(resume) {
+        document.getElementById("previewName").textContent =
+            resume.name || "Your Name";
+
+        document.getElementById("previewContact").textContent =
+            [resume.email, resume.phone].filter(Boolean).join(" | ");
+
+        document.getElementById("previewObjective").textContent =
+            resume.objective || "Add your career objective.";
+
+        document.getElementById("previewEducation").textContent =
+            resume.education || "Add your education details.";
+
+        document.getElementById("previewSkills").textContent =
+            resume.skills || "Add your technical skills.";
+
+        document.getElementById("previewProjects").textContent =
+            resume.projects || "Add your academic projects.";
+    }
+
+    function fillResumeForm(resume) {
+        document.getElementById("fullName").value = resume.name || "";
+        document.getElementById("email").value = resume.email || "";
+        document.getElementById("phone").value = resume.phone || "";
+        document.getElementById("education").value = resume.education || "";
+        document.getElementById("skills").value = resume.skills || "";
+        document.getElementById("projects").value = resume.projects || "";
+        document.getElementById("objective").value = resume.objective || "";
+
+        displayResume(resume);
+    }
+
+    resumeForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const resumeData = {
+            name: document.getElementById("fullName").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            education: document.getElementById("education").value.trim(),
+            skills: document.getElementById("skills").value.trim(),
+            projects: document.getElementById("projects").value.trim(),
+            objective: document.getElementById("objective").value.trim()
+        };
+
+        // Save resume separately for the currently logged-in user.
+        setUserData("studentResume", resumeData);
+        setUserData("resumeCreated", true);
+
+        displayResume(resumeData);
+
+        alert("Resume generated and saved successfully! 💜");
+    });
+
+    document.getElementById("printResume").addEventListener("click", function() {
+        window.print();
+    });
+
+    // Load this user's saved resume when the page opens.
+    const savedResume = getUserData("studentResume", null);
+
+    if (savedResume && typeof savedResume === "object") {
+        fillResumeForm(savedResume);
+    }
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Internships | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .internship-page {
+            min-height: 100vh;
+            padding: 40px 7%;
+            color: white;
+        }
+
+        .internship-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .internship-header h1 span {
+            background: linear-gradient(90deg, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .back-link {
+            color: #e9b7ff;
+            text-decoration: none;
+        }
+
+        .internship-intro {
+            color: #d0cde0;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .internship-card {
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-6px);
+            border-color: #f472b6;
+        }
+
+        .internship-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .internship-card h2 {
+            color: #e9b7ff;
+            margin-bottom: 12px;
+            font-size: 21px;
+        }
+
+        .internship-card p {
+            color: #d0cde0;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .internship-tag {
+            display: inline-block;
+            margin: 14px 0;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: rgba(192, 132, 252, 0.15);
+            color: #e9b7ff;
+            font-size: 12px;
+        }
+
+        .apply-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .apply-btn:hover {
+            opacity: 0.85;
+        }
+
+        .apply-btn:disabled {
+            background: #55506a;
+            cursor: default;
+        }
+
+        .internship-notice {
+            margin-top: 30px;
+            color: #bfb8d5;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .internship-page {
+                padding: 25px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="internship-page">
+
+        <header class="internship-header">
+            <h1>Explore <span>Internships ✨</span></h1>
+
+            <a href="dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+        </header>
+
+        <p class="internship-intro">
+            Discover learning opportunities, develop your skills,
+            and take your first step towards your career!
+        </p>
+
+        <section class="internship-grid">
+
+            <!-- INTERNSHIP 1 -->
+            <article class="internship-card">
+                <div class="internship-icon">💻</div>
+
+                <h2>Web Development Intern</h2>
+
+                <p><strong>Organization:</strong> Sample Organization</p>
+                <p><strong>Skills:</strong> HTML, CSS, JavaScript</p>
+                <p><strong>Mode:</strong> Remote / Online</p>
+
+                <span class="internship-tag">Web Development</span>
+
+                <button class="apply-btn"
+                        data-internship="web-intern">
+                    Apply Now →
+                </button>
+            </article>
+
+            <!-- INTERNSHIP 2 -->
+            <article class="internship-card">
+                <div class="internship-icon">☕</div>
+
+                <h2>Java Development Intern</h2>
+
+                <p><strong>Organization:</strong> Sample Organization</p>
+                <p><strong>Skills:</strong> Java, OOP, SQL</p>
+                <p><strong>Mode:</strong> Hybrid</p>
+
+                <span class="internship-tag">Java Development</span>
+
+                <button class="apply-btn"
+                        data-internship="java-intern">
+                    Apply Now →
+                </button>
+            </article>
+
+            <!-- INTERNSHIP 3 -->
+            <article class="internship-card">
+                <div class="internship-icon">🗄️</div>
+
+                <h2>Database Intern</h2>
+
+                <p><strong>Organization:</strong> Sample Organization</p>
+                <p><strong>Skills:</strong> SQL, DBMS, Database Design</p>
+                <p><strong>Mode:</strong> Remote / Online</p>
+
+                <span class="internship-tag">Database Management</span>
+
+                <button class="apply-btn"
+                        data-internship="database-intern">
+                    Apply Now →
+                </button>
+            </article>
+
+        </section>
+
+        <p class="internship-notice">
+            Note: These are sample internship listings for your academic
+            project. They are not verified live vacancies.
+        </p>
+
+    </main>
+
+
+
+<script src="script.js"></script>
+
+<script>
+    // Internship details
+    const internshipList = [
+        {
+            id: "web-intern",
+            title: "Web Development Intern",
+            organization: "Sample Organization"
+        },
+        {
+            id: "java-intern",
+            title: "Java Development Intern",
+            organization: "Sample Organization"
+        },
+        {
+            id: "database-intern",
+            title: "Database Intern",
+            organization: "Sample Organization"
+        }
+    ];
+
+    // Check login
+    function checkLogin() {
+        if (
+            typeof isLoggedIn !== "function" ||
+            !isLoggedIn()
+        ) {
+            alert("Please log in to apply for an internship. 💜");
+            window.location.href = "login.html";
+            return false;
+        }
+
+        return true;
+    }
+
+    // Read the current user's submitted applications
+    function getAppliedInternships() {
+        let applications = getUserData("appliedInternships", []);
+
+        if (!Array.isArray(applications)) {
+            applications = [];
+        }
+
+        return applications;
+    }
+
+    // Update Apply buttons based on submitted applications
+    function updateApplyButtons() {
+        const applications = getAppliedInternships();
+
+        document.querySelectorAll(".apply-btn").forEach(button => {
+            const internshipId = button.dataset.internship;
+
+            const alreadyApplied = applications.some(
+                application => application.id === internshipId
+            );
+
+            button.textContent = alreadyApplied
+                ? "✓ Applied"
+                : "Apply Now →";
+
+            button.disabled = alreadyApplied;
+        });
+    }
+
+    // Open the application form when Apply Now is clicked
+    document.querySelectorAll(".apply-btn").forEach(button => {
+        button.addEventListener("click", function () {
+
+            if (!checkLogin()) {
+                return;
+            }
+
+            const internshipId = this.dataset.internship;
+
+            const applications = getAppliedInternships();
+
+            const alreadyApplied = applications.some(
+                application => application.id === internshipId
+            );
+
+            if (alreadyApplied) {
+                alert("You have already applied for this internship. 💜");
+                updateApplyButtons();
+                return;
+            }
+
+            // Navigate to the application form.
+            // Do not save an application on this page.
+            window.location.href =
+                "internship-application.html?internship=" +
+                encodeURIComponent(internshipId);
+        });
+    });
+
+    // Update buttons when the page loads
+    updateApplyButtons();
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Internship Applications | Student Career Hub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #f8f7ff;
+            background: #090b20;
+        }
+
+        .dashboard-page {
+            min-height: 100vh;
+            padding: 30px 6%;
+            color: #f8f7ff;
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    rgba(129, 66, 255, 0.22),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(236, 72, 153, 0.15),
+                    transparent 35%
+                ),
+                linear-gradient(135deg, #090b20, #15112f 55%, #0a1028);
+        }
+
+        .dashboard-page * {
+            box-sizing: border-box;
+        }
+
+        /* NAVBAR */
+        .dashboard-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 18px 25px;
+            margin-bottom: 35px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 18px;
+            backdrop-filter: blur(15px);
+        }
+
+        .dashboard-logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .dashboard-logo span {
+            background: linear-gradient(90deg, #e58bff, #ff85c8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+            gap: 23px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-nav a {
+            color: #d8d5f1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .dashboard-nav a:hover {
+            color: #f19bff;
+        }
+
+        .dashboard-nav .dashboard-logout {
+            padding: 10px 19px;
+            color: #ffffff;
+            border: 1px solid rgba(255, 145, 210, 0.6);
+            border-radius: 10px;
+            background: linear-gradient(
+                100deg,
+                rgba(135, 73, 255, 0.25),
+                rgba(236, 72, 153, 0.20)
+            );
+        }
+
+        .dashboard-nav .dashboard-logout:hover {
+            background: linear-gradient(100deg, #8955ff, #e85ca9);
+            transform: translateY(-2px);
+        }
+
+        /* WELCOME SECTION */
+        .dashboard-welcome {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            padding: 42px;
+            margin-bottom: 35px;
+            overflow: hidden;
+            border: 1px solid rgba(181, 132, 255, 0.30);
+            border-radius: 24px;
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(61, 130, 255, 0.25),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    115deg,
+                    rgba(111, 63, 190, 0.30),
+                    rgba(219, 77, 161, 0.14),
+                    rgba(42, 76, 166, 0.20)
+                );
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+        }
+
+        .welcome-text {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+        }
+
+        .welcome-label {
+            color: #d4a4ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+
+        .dashboard-welcome h1 {
+            color: #ffffff;
+            font-size: clamp(28px, 4vw, 43px);
+            line-height: 1.2;
+            margin: 0 0 17px;
+        }
+
+        .dashboard-welcome h1 span {
+            background: linear-gradient(90deg, #f18cdd, #a9a2ff, #7bc8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dashboard-welcome p {
+            color: #d0cde9;
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .welcome-decoration {
+            flex-shrink: 0;
+            width: 115px;
+            height: 115px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+            border-radius: 30px;
+            background: linear-gradient(
+                135deg,
+                rgba(133, 100, 255, 0.24),
+                rgba(64, 158, 255, 0.16),
+                rgba(242, 113, 197, 0.18)
+            );
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 40px rgba(136, 89, 255, 0.15);
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* SECTION HEADING */
+        .dashboard-section {
+            margin-bottom: 35px;
+        }
+
+        .dashboard-section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-section-heading h2 {
+            color: #ffffff;
+            font-size: 23px;
+            margin: 0;
+        }
+
+        .dashboard-section-heading p {
+            color: #aaa7d1;
+            font-size: 13px;
+            margin: 7px 0 0;
+        }
+
+        /* APPLICATION COUNT */
+        .application-count {
+            display: inline-block;
+            padding: 12px 17px;
+            margin-bottom: 22px;
+            border-radius: 12px;
+            color: #e8e5ff;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            font-weight: 700;
+        }
+
+        #countElement {
+            color: #ff9edb;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+        /* APPLICATION CARDS */
+        #applicationsContainer {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .application-card {
+            min-width: 0;
+            padding: 24px 22px;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            transition:
+                transform 0.3s,
+                border-color 0.3s,
+                box-shadow 0.3s;
+            overflow-wrap: anywhere;
+        }
+
+        .application-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(203, 151, 255, 0.55);
+            box-shadow: 0 12px 35px rgba(106, 65, 210, 0.16);
+        }
+
+        .application-card h2 {
+            color: #e8b5ff;
+            font-size: 20px;
+            line-height: 1.5;
+            margin: 0 0 7px;
+        }
+
+        .organization {
+            color: #aaa7d1;
+            font-size: 13px;
+            margin-bottom: 17px;
+        }
+
+        .application-card p {
+            color: #d0cde9;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .application-card strong {
+            color: #cba8ff;
+        }
+
+        /* APPLICATION STATUS */
+        .status {
+            display: inline-block;
+            padding: 5px 11px;
+            border-radius: 20px;
+            background: rgba(67, 219, 224, 0.13);
+            border: 1px solid rgba(67, 219, 224, 0.25);
+            color: #91e9ec;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* CANCEL BUTTON */
+        .cancel-btn {
+            width: 100%;
+            padding: 11px 17px;
+            margin-top: 17px;
+            border: 1px solid rgba(255, 145, 210, 0.45);
+            border-radius: 10px;
+            background: linear-gradient(
+                100deg,
+                rgba(135, 73, 255, 0.85),
+                rgba(217, 87, 180, 0.85)
+            );
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cancel-btn:hover {
+            background: linear-gradient(100deg, #8955ff, #e85ca9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(157, 80, 222, 0.25);
+        }
+
+        /* EMPTY APPLICATIONS */
+        .empty-message {
+            grid-column: 1 / -1;
+            padding: 40px 25px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 20px;
+        }
+
+        .empty-message h2 {
+            color: #e8b5ff;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .empty-message p {
+            color: #aaa7ca;
+            font-size: 13px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            padding: 11px 17px;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #8656ef, #d957b4);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .browse-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(157, 80, 222, 0.3);
+        }
+
+        /* FOOTER */
+        .dashboard-footer {
+            padding: 28px 0 5px;
+            text-align: center;
+            color: #8985ad;
+            font-size: 12px;
+        }
+
+        .dashboard-footer span {
+            color: #d78fff;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            #applicationsContainer {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-page {
+                padding: 18px 15px;
+            }
+
+            .dashboard-navbar {
+                padding: 18px;
+                margin-bottom: 23px;
+            }
+
+            .dashboard-logo {
+                font-size: 19px;
+            }
+
+            .dashboard-nav {
+                gap: 15px;
+            }
+
+            .dashboard-nav a {
+                font-size: 12px;
+            }
+
+            .dashboard-welcome {
+                padding: 25px;
+                gap: 15px;
+            }
+
+            .dashboard-welcome h1 {
+                font-size: 28px;
+            }
+
+            .dashboard-welcome p {
+                font-size: 13px;
+            }
+
+            .welcome-decoration {
+                width: 75px;
+                height: 75px;
+                border-radius: 20px;
+                font-size: 35px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .dashboard-welcome {
+                display: block;
+            }
+
+            .welcome-decoration {
+                margin-top: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .welcome-decoration {
+                animation: none;
+            }
+
+            .application-card,
+            .cancel-btn,
+            .browse-btn {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-page">
+
+    <!-- NAVBAR -->
+    <nav class="dashboard-navbar">
+        <a href="index.html" class="dashboard-logo">
+            Student <span>Career Hub</span>
+        </a>
+
+        <div class="dashboard-nav">
+            <a href="index.html">Home</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="internship.html">Internships</a>
+            <a href="resume-builder.html">Resume Builder</a>
+            <a href="index.html" class="dashboard-logout">Logout ↗</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- WELCOME SECTION -->
+        <section class="dashboard-welcome">
+            <div class="welcome-text">
+                <div class="welcome-label">
+                    YOUR CAREER • YOUR FUTURE
+                </div>
+
+                <h1>
+                    My Internship <span>Applications</span>
+                </h1>
+
+                <p>
+                    Track your internship applications in one place.<br>
+                    Review your submitted details and manage your applications whenever you need.
+                </p>
+            </div>
+
+            <div class="welcome-decoration" aria-hidden="true">
+                🎓
+            </div>
+        </section>
+
+        <!-- APPLICATIONS SECTION -->
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-heading">
+                <div>
+                    <h2>My Applications</h2>
+                    <p>
+                        Review your submitted internship details and application status.
+                    </p>
+                </div>
+            </div>
+
+            <div class="application-count">
+                Total Applications:
+                <span id="countElement">0</span>
+            </div>
+
+            <div id="applicationsContainer"></div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dashboard-footer">
+        © 2026 Student Career Hub |
+        <span>Learn, Grow, Succeed</span> 💜
+    </footer>
+
+</div>
+
+<script>
+    const container = document.getElementById("applicationsContainer");
+    const countElement = document.getElementById("countElement");
+
+    // Read applications from localStorage
+    function readApplications() {
+        try {
+            const storedApplications =
+                localStorage.getItem("appliedInternships");
+
+            const applications = JSON.parse(storedApplications || "[]");
+
+            return Array.isArray(applications) ? applications : [];
+
+        } catch (error) {
+            console.error("Error reading applications:", error);
+            return [];
+        }
+    }
+
+    // Safely display text
+    function safeText(value) {
+        const element = document.createElement("span");
+
+        element.textContent =
+            value === undefined || value === null || value === ""
+                ? "Not provided"
+                : String(value);
+
+        return element.innerHTML;
+    }
+
+    // Display internship applications
+    function displayApplications() {
+        const applications = readApplications();
+
+        container.innerHTML = "";
+        countElement.textContent = applications.length;
+
+        if (applications.length === 0) {
+            container.innerHTML = `
+                <div class="empty-message">
+                    <h2>No Internship Applications Found</h2>
+
+                    <p>
+                        You have not submitted any internship applications yet.
+                    </p>
+
+                    <a href="internship.html" class="browse-btn">
+                        Browse Internships
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        applications.forEach((application, index) => {
+            const card = document.createElement("div");
+            card.className = "application-card";
+
+            card.innerHTML = `
+                <h2>${safeText(application.title)}</h2>
+
+                <div class="organization">
+                    ${safeText(application.organization)}
+                </div>
+
+                <p>
+                    <strong>Application ID:</strong>
+                    ${safeText(application.applicationId)}
+                </p>
+
+                <p>
+                    <strong>Full Name:</strong>
+                    ${safeText(application.fullName)}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    ${safeText(application.email)}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    ${safeText(application.phone)}
+                </p>
+
+                <p>
+                    <strong>Qualification:</strong>
+                    ${safeText(application.qualification)}
+                </p>
+
+                <p>
+                    <strong>Skills:</strong>
+                    ${safeText(application.skills)}
+                </p>
+
+                <p>
+                    <strong>Reason for Applying:</strong>
+                    ${safeText(application.reason)}
+                </p>
+
+                <p>
+                    <strong>Application Date:</strong>
+                    ${safeText(application.applicationDate)}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    <span class="status">
+                        ${safeText(application.status || "Submitted")}
+                    </span>
+                </p>
+            `;
+
+            const cancelButton = document.createElement("button");
+
+            cancelButton.type = "button";
+            cancelButton.className = "cancel-btn";
+            cancelButton.textContent = "Cancel Application";
+
+            cancelButton.addEventListener("click", function () {
+                cancelApplication(index);
+            });
+
+            card.appendChild(cancelButton);
+            container.appendChild(card);
+        });
+    }
+
+    // Cancel an internship application
+    function cancelApplication(applicationIndex) {
+        const confirmed = confirm(
+            "Are you sure you want to cancel this internship application?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            const applications = readApplications();
+
+            if (
+                applicationIndex < 0 ||
+                applicationIndex >= applications.length
+            ) {
+                alert("Application not found. Please refresh the page.");
+                displayApplications();
+                return;
+            }
+
+            // Remove the selected application
+            applications.splice(applicationIndex, 1);
+
+            // Update localStorage
+            localStorage.setItem(
+                "appliedInternships",
+                JSON.stringify(applications)
+            );
+
+            // Refresh the cards and count
+            displayApplications();
+
+            alert("Internship application cancelled successfully! 💜");
+
+        } catch (error) {
+            console.error("Error cancelling application:", error);
+
+            alert(
+                "Unable to cancel the application. Please check the browser console."
+            );
+        }
+    }
+
+    // Load applications when the page opens
+    displayApplications();
+</script>
+
+</body>
+</html>
+
+

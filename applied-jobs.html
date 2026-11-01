@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #090b20;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 35px 7%;
+            color: white;
+            background:
+                radial-gradient(circle at 15% 20%,
+                    rgba(129, 66, 255, 0.2), transparent 35%),
+                radial-gradient(circle at 85% 75%,
+                    rgba(236, 72, 153, 0.15), transparent 35%),
+                linear-gradient(135deg, #090b20, #15112f, #0a1028);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #d18bff;
+        }
+
+        a {
+            color: #e1b7ff;
+            text-decoration: none;
+        }
+
+        .intro {
+            color: #c9c5dc;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .summary {
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(190, 130, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .summary strong {
+            color: #e4b8ff;
+            font-size: 24px;
+        }
+
+        .applications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 20px;
+        }
+
+        .application-card {
+            padding: 24px;
+            border: 1px solid rgba(190, 130, 255, 0.3);
+            border-radius: 17px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow-wrap: anywhere;
+        }
+
+        .application-card h2 {
+            color: #e4b8ff;
+            margin-top: 0;
+        }
+
+        .application-card p {
+            color: #d0cde0;
+            line-height: 1.7;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(74, 222, 128, 0.25);
+            color: #a7f3d0;
+            font-size: 13px;
+        }
+
+        .cancel-btn {
+            padding: 9px 13px;
+            border: 1px solid rgba(248, 113, 113, 0.5);
+            border-radius: 9px;
+            background: rgba(239, 68, 68, 0.13);
+            color: #fca5a5;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cancel-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 35px 20px;
+            border: 1px dashed rgba(190, 130, 255, 0.4);
+            border-radius: 17px;
+        }
+
+        .empty h2 {
+            color: #e4b8ff;
+        }
+
+        .empty p {
+            color: #c9c5dc;
+            line-height: 1.8;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            color: white;
+        }
+
+        @media (max-width: 500px) {
+            .page {
+                padding: 22px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="page">
+
+    <header class="header">
+        <h1>My <span>Applications 💜</span></h1>
+
+        <a href="dashboard.html">← Dashboard</a>
+    </header>
+
+    <p class="intro">
+        Review and manage the job applications you have submitted
+        through Student Career Hub.
+    </p>
+
+    <section class="summary">
+        Total Applications:
+        <strong id="applicationCount">0</strong>
+    </section>
+
+    <section class="applications" id="applicationsList"
+             aria-live="polite">
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+<script>
+    const applicationsList =
+        document.getElementById("applicationsList");
+
+    const applicationCount =
+        document.getElementById("applicationCount");
+
+    // Check that a user is logged in
+    if (typeof isLoggedIn !== "function" || !isLoggedIn()) {
+        window.location.href = "login.html";
+    }
+
+    // Read applications belonging to the current user
+    function getApplications() {
+        let applications = getUserData("appliedJobs", []);
+
+        if (!Array.isArray(applications)) {
+            applications = [];
+        }
+
+        return applications;
+    }
+
+    // Save applications belonging to the current user
+    function saveApplications(applications) {
+        setUserData("appliedJobs", applications);
+    }
+
+    // Display applications
+    function loadApplications() {
+        const applications = getApplications();
+
+        applicationCount.textContent = applications.length;
+        applicationsList.replaceChildren();
+
+        if (applications.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "empty";
+
+            const heading = document.createElement("h2");
+            heading.textContent = "No Applications Yet 📩";
+
+            const message = document.createElement("p");
+            message.textContent =
+                "Apply for a job to see your application details here.";
+
+            const link = document.createElement("a");
+            link.href = "jobs.html";
+            link.className = "explore-btn";
+            link.textContent = "Explore Jobs →";
+
+            empty.append(heading, message, link);
+            applicationsList.appendChild(empty);
+
+            return;
+        }
+
+        applications.forEach((application, index) => {
+            const card = document.createElement("article");
+            card.className = "application-card";
+
+            const heading = document.createElement("h2");
+
+            heading.textContent =
+                application.title ||
+                ({
+                    java: "Java Developer",
+                    fullstack: "Full Stack Developer",
+                    web: "Web Developer"
+                }[application.id] || "Job Application");
+
+            const name = document.createElement("p");
+            name.textContent =
+                "Applicant: " + (application.fullName || "Not provided");
+
+            const email = document.createElement("p");
+            email.textContent =
+                "Email: " + (application.email || "Not provided");
+
+            const qualification = document.createElement("p");
+            qualification.textContent =
+                "Qualification: " +
+                (application.qualification || "Not provided");
+
+            const date = document.createElement("p");
+            date.textContent =
+                "Application Date: " +
+                (application.applicationDate || "Not available");
+
+            const id = document.createElement("p");
+            id.textContent =
+                "Application ID: " +
+                (application.applicationId || "Legacy record");
+
+            const statusRow = document.createElement("div");
+            statusRow.className = "status-row";
+
+            const status = document.createElement("span");
+            status.className = "status";
+            status.textContent =
+                "Status: " + (application.status || "Recorded");
+
+            const cancelButton = document.createElement("button");
+            cancelButton.type = "button";
+            cancelButton.className = "cancel-btn";
+            cancelButton.textContent = "Cancel Application";
+
+            cancelButton.addEventListener("click", function () {
+                const jobTitle =
+                    application.title ||
+                    ({
+                        java: "Java Developer",
+                        fullstack: "Full Stack Developer",
+                        web: "Web Developer"
+                    }[application.id] || "this job");
+
+                const confirmed = confirm(
+                    "Are you sure you want to cancel your application for " +
+                    jobTitle + "?"
+                );
+
+                if (!confirmed) {
+                    return;
+                }
+
+                // Get the latest data before removing the application.
+                const latestApplications = getApplications();
+
+                // Use the unique application ID when available.
+                let removeIndex = -1;
+
+                if (application.applicationId) {
+                    removeIndex = latestApplications.findIndex(
+                        item =>
+                            item.applicationId === application.applicationId
+                    );
+                } else {
+                    // Legacy records may not have an application ID.
+                    removeIndex = latestApplications.indexOf(
+                        applications[index]
+                    );
+                }
+
+                if (removeIndex === -1) {
+                    alert(
+                        "This application could not be found. Please refresh the page."
+                    );
+                    loadApplications();
+                    return;
+                }
+
+                latestApplications.splice(removeIndex, 1);
+
+                // Save the updated list for the current user.
+                saveApplications(latestApplications);
+
+                // Refresh the cards and application count.
+                loadApplications();
+
+                alert("Application cancelled successfully. 💜");
+            });
+
+            statusRow.append(status, cancelButton);
+
+            card.append(
+                heading,
+                name,
+                email,
+                qualification,
+                date,
+                id,
+                statusRow
+            );
+
+            applicationsList.appendChild(card);
+        });
+    }
+
+    // Load applications when the page opens
+    if (typeof getUserData === "function" &&
+        typeof setUserData === "function") {
+        loadApplications();
+    } else {
+        applicationsList.textContent =
+            "Unable to load application storage. Please check script.js.";
+    }
+</script>
+
+</body>
+</html>
+

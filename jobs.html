@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Jobs | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .jobs-page {
+            min-height: 100vh;
+            padding: 40px 7%;
+            color: white;
+        }
+
+        .jobs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .jobs-header h1 span {
+            color: #d18bff;
+        }
+
+        .back-link {
+            color: #e1b7ff;
+            text-decoration: none;
+        }
+
+        .jobs-intro {
+            margin-bottom: 30px;
+            color: #c9c5dc;
+        }
+
+        .jobs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .job-card {
+            padding: 25px;
+            border: 1px solid rgba(190, 130, 255, 0.3);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            border-color: #d18bff;
+        }
+
+        .job-card h2 {
+            color: #e4b8ff;
+            margin-bottom: 12px;
+        }
+
+        .job-card p {
+            color: #d0cde0;
+            line-height: 1.7;
+        }
+
+        .job-type {
+            display: inline-block;
+            margin: 12px 0;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(190, 130, 255, 0.15);
+            color: #e4b8ff;
+            font-size: 13px;
+        }
+
+        .save-btn {
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            opacity: 0.88;
+        }
+
+        .save-btn:disabled {
+            background: #55506a;
+            cursor: default;
+        }
+
+        .apply-job-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid #d18bff;
+    border-radius: 10px;
+    background: transparent;
+    color: #e4b8ff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.apply-job-btn:hover {
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    color: white;
+}
+
+.apply-job-btn:disabled {
+    background: #55506a;
+    color: white;
+    cursor: default;
+}
+    </style>
+</head>
+
+<body>
+    <main class="jobs-page">
+
+        <header class="jobs-header">
+            <h1>Explore <span>Jobs ✨</span></h1>
+            <a href="dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+        </header>
+
+        <p class="jobs-intro">
+            Discover career opportunities and save the jobs you like!
+        </p>
+
+        <section class="jobs-list">
+
+            <article class="job-card">
+                <h2>Java Developer</h2>
+                <p>Company: Example Company</p>
+                <p>Skills: Java, OOP, SQL</p>
+                <span class="job-type">Full-time · Entry-level</span>
+                <button class="save-btn" data-job="java">
+                    ♡ Save Job
+                </button>
+                <button class="apply-job-btn" data-job="java">
+    Apply Now →
+</button>
+            </article>
+
+            <article class="job-card">
+                <h2>Full Stack Developer</h2>
+                <p>Company: Example Company</p>
+                <p>Skills: HTML, CSS, JavaScript, Java</p>
+                <span class="job-type">Full-time · Entry-level</span>
+                <button class="save-btn" data-job="fullstack">
+                    ♡ Save Job
+                </button>
+                <button class="apply-job-btn" data-job="fullstack">
+    Apply Now →
+</button>
+            </article>
+
+            <article class="job-card">
+                <h2>Web Developer</h2>
+                <p>Company: Example Company</p>
+                <p>Skills: HTML, CSS, JavaScript</p>
+                <span class="job-type">Entry-level</span>
+                <button class="save-btn" data-job="web">
+                    ♡ Save Job
+                </button>
+                <button class="apply-job-btn" data-job="web">
+    Apply Now →
+</button>
+            </article>
+
+        </section>
+    </main>
+
+<script src="script.js"></script>
+
+<script>
+    const jobs = [
+        {
+            id: "java",
+            title: "Java Developer",
+            company: "Example Company"
+        },
+        {
+            id: "fullstack",
+            title: "Full Stack Developer",
+            company: "Example Company"
+        },
+        {
+            id: "web",
+            title: "Web Developer",
+            company: "Example Company"
+        }
+    ];
+
+    // Check login and load this user's saved jobs
+    if (!isLoggedIn()) {
+        window.location.href = "login.html";
+    } else {
+        let savedJobs = getUserData("savedJobs", []);
+        let appliedJobs = getUserData("appliedJobs", []);
+
+        // SAVED JOBS
+        function updateButtons() {
+            document.querySelectorAll(".save-btn").forEach(button => {
+                const isSaved = savedJobs.some(
+                    job => job.id === button.dataset.job
+                );
+
+                button.textContent = isSaved ? "♥ Saved" : "♡ Save Job";
+                button.disabled = isSaved;
+            });
+        }
+
+        document.querySelectorAll(".save-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const job = jobs.find(
+                    item => item.id === button.dataset.job
+                );
+
+                if (job && !savedJobs.some(item => item.id === job.id)) {
+                    savedJobs.push(job);
+
+                    setUserData("savedJobs", savedJobs);
+
+                    updateButtons();
+                    alert("Job saved successfully! 💜");
+                }
+            });
+        });
+
+        updateButtons();
+
+        // APPLIED JOBS
+        function updateApplyButtons() {
+            document.querySelectorAll(".apply-job-btn").forEach(button => {
+                const alreadyApplied = appliedJobs.some(
+                    job => job.id === button.dataset.job
+                );
+
+                button.textContent = alreadyApplied
+                    ? "✓ Applied"
+                    : "Apply Now →";
+
+                button.disabled = alreadyApplied;
+            });
+        }
+
+        document.querySelectorAll(".apply-job-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const jobId = button.dataset.job;
+
+                window.location.href =
+                    "apply.html?job=" + encodeURIComponent(jobId);
+            });
+        });
+
+        updateApplyButtons();
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ===== DASHBOARD THEME ===== */
+
+        .dashboard-page {
+            min-height: 100vh;
+            padding: 30px 6%;
+            color: #f8f7ff;
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    rgba(129, 66, 255, 0.22),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(236, 72, 153, 0.15),
+                    transparent 35%
+                ),
+                linear-gradient(135deg, #090b20, #15112f 55%, #0a1028);
+
+            box-sizing: border-box;
+        }
+
+        .dashboard-page * {
+            box-sizing: border-box;
+        }
+
+        .dashboard-page a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ===== TOP NAVBAR ===== */
+
+        .dashboard-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 18px 25px;
+            margin-bottom: 35px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 18px;
+            backdrop-filter: blur(15px);
+        }
+
+        .dashboard-logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+        }
+
+        .dashboard-logo span {
+            background: linear-gradient(90deg, #e58bff, #ff85c8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dashboard-nav {
+            display: flex;
+            align-items: center;
+            gap: 23px;
+            flex-wrap: wrap;
+        }
+
+        .dashboard-nav a {
+            color: #d8d5f1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .dashboard-nav a:hover {
+            color: #f19bff;
+        }
+
+        .dashboard-logout {
+            padding: 10px 19px;
+            color: #ffffff !important;
+            text-decoration: none;
+            border: 1px solid rgba(255, 145, 210, 0.6);
+            border-radius: 10px;
+            background: linear-gradient(
+                100deg,
+                rgba(135, 73, 255, 0.25),
+                rgba(236, 72, 153, 0.20)
+            );
+            transition: 0.3s;
+        }
+
+        .dashboard-logout:hover {
+            background: linear-gradient(100deg, #8955ff, #e85ca9);
+            transform: translateY(-2px);
+        }
+
+        /* ===== WELCOME SECTION ===== */
+
+        .dashboard-welcome {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+
+            padding: 42px;
+            margin-bottom: 35px;
+            overflow: hidden;
+
+            border: 1px solid rgba(181, 132, 255, 0.30);
+            border-radius: 24px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(61, 130, 255, 0.25),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    115deg,
+                    rgba(111, 63, 190, 0.30),
+                    rgba(219, 77, 161, 0.14),
+                    rgba(42, 76, 166, 0.20)
+                );
+
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+        }
+
+        .welcome-text {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+        }
+
+        .welcome-label {
+            color: #d4a4ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+
+        .dashboard-welcome h1 {
+            color: #ffffff;
+            font-size: clamp(28px, 4vw, 43px);
+            line-height: 1.2;
+            margin: 0 0 17px;
+        }
+
+        .dashboard-welcome h1 span {
+            background: linear-gradient(90deg, #f18cdd, #a9a2ff, #7bc8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .dashboard-welcome p {
+            color: #d0cde9;
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .welcome-decoration {
+            flex-shrink: 0;
+            width: 145px;
+            height: 145px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 70px;
+            border-radius: 35px;
+
+            background: linear-gradient(
+                135deg,
+                rgba(133, 100, 255, 0.24),
+                rgba(64, 158, 255, 0.16),
+                rgba(242, 113, 197, 0.18)
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 40px rgba(136, 89, 255, 0.15);
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        /* ===== SECTION HEADINGS ===== */
+
+        .dashboard-section {
+            margin-bottom: 35px;
+        }
+
+        .dashboard-section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-section-heading h2 {
+            color: #ffffff;
+            font-size: 23px;
+            margin: 0;
+        }
+
+        .dashboard-section-heading p {
+            color: #aaa7d1;
+            font-size: 13px;
+            margin: 7px 0 0;
+        }
+
+        /* ===== ACTIVITY CARDS ===== */
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .dashboard-card {
+            position: relative;
+            min-width: 0;
+            padding: 24px 20px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 18px;
+
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s, border-color 0.3s,
+                        box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(203, 151, 255, 0.55);
+            box-shadow: 0 12px 35px rgba(106, 65, 210, 0.16);
+        }
+
+        .card-icon {
+            width: 49px;
+            height: 49px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .icon-purple {
+            background: rgba(142, 91, 255, 0.18);
+        }
+
+        .icon-pink {
+            background: rgba(242, 100, 187, 0.16);
+        }
+
+        .icon-blue {
+            background: rgba(73, 151, 255, 0.16);
+        }
+
+        .icon-cyan {
+            background: rgba(67, 219, 224, 0.13);
+        }
+
+        .dashboard-card h3 {
+            color: #e8e5ff;
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 0 0 12px;
+        }
+
+        .dashboard-card-number {
+            color: #ffffff;
+            font-size: 29px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .dashboard-card p {
+            color: #aaa7ca;
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 0 0 18px;
+        }
+
+        .dashboard-card-link {
+            display: inline-block;
+            color: #d7a0ff;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .dashboard-card-link:hover {
+            color: #ff9edb;
+        }
+
+        /* ===== LOWER DASHBOARD PANELS ===== */
+
+        .dashboard-bottom-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 22px;
+        }
+
+        .dashboard-panel {
+            min-width: 0;
+            padding: 27px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(185, 157, 255, 0.17);
+            border-radius: 20px;
+
+            backdrop-filter: blur(12px);
+        }
+
+        .dashboard-panel h2 {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 0 8px;
+        }
+
+        .panel-description {
+            color: #aaa7ca;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0 0 15px;
+        }
+
+        /* ===== OPPORTUNITY LIST ===== */
+
+        .opportunity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 19px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .opportunity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .opportunity-icon {
+            flex-shrink: 0;
+            width: 43px;
+            height: 43px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                rgba(139, 92, 246, 0.22),
+                rgba(236, 72, 153, 0.16)
+            );
+        }
+
+        .opportunity-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .opportunity-info h3 {
+            color: #eeeaff;
+            font-size: 15px;
+            margin: 2px 0 7px;
+        }
+
+        .opportunity-info p {
+            color: #aaa7ca;
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 0 0 10px;
+        }
+
+        .opportunity-link {
+            color: #c8a2ff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .opportunity-link:hover {
+            color: #ff9edb;
+        }
+
+        /* ===== RESUME STATUS ===== */
+
+        .resume-status-box {
+            padding: 19px;
+            margin-top: 20px;
+            border-radius: 15px;
+
+            background: linear-gradient(
+                110deg,
+                rgba(135, 83, 255, 0.13),
+                rgba(236, 72, 153, 0.09)
+            );
+
+            border: 1px solid rgba(188, 141, 255, 0.18);
+        }
+
+        .resume-status-label {
+            color: #aaa7ca;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .resume-status-value {
+            color: #ffb0df;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .resume-status-box p {
+            color: #c1bddc;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0 0 17px;
+        }
+
+        .resume-button {
+            display: inline-block;
+            padding: 11px 17px;
+            border-radius: 10px;
+
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+
+            background: linear-gradient(100deg, #8656ef, #d957b4);
+            box-shadow: 0 5px 20px rgba(157, 80, 222, 0.18);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .resume-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(157, 80, 222, 0.30);
+        }
+
+        /* ===== FOOTER ===== */
+
+        .dashboard-footer {
+            padding: 28px 0 5px;
+            text-align: center;
+            color: #8985ad;
+            font-size: 12px;
+        }
+
+        .dashboard-footer span {
+            color: #d78fff;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+
+        @media (max-width: 1050px) {
+            .dashboard-cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .dashboard-bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .dashboard-page {
+                padding: 18px 15px;
+            }
+
+            .dashboard-navbar {
+                padding: 18px;
+                margin-bottom: 23px;
+            }
+
+            .dashboard-logo {
+                font-size: 19px;
+            }
+
+            .dashboard-nav {
+                gap: 15px;
+            }
+
+            .dashboard-nav a {
+                font-size: 12px;
+            }
+
+            .dashboard-welcome {
+                padding: 25px;
+                gap: 15px;
+            }
+
+            .dashboard-welcome h1 {
+                font-size: 28px;
+            }
+
+            .dashboard-welcome p {
+                font-size: 13px;
+            }
+
+            .welcome-decoration {
+                width: 75px;
+                height: 75px;
+                border-radius: 20px;
+                font-size: 35px;
+            }
+
+            .dashboard-section-heading h2 {
+                font-size: 20px;
+            }
+
+            .dashboard-card {
+                padding: 20px;
+            }
+
+            .dashboard-panel {
+                padding: 21px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .dashboard-welcome {
+                display: block;
+            }
+
+            .welcome-decoration {
+                margin-top: 20px;
+            }
+
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-nav {
+                gap: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .welcome-decoration {
+                animation: none;
+            }
+
+            .dashboard-card,
+            .dashboard-logout,
+            .resume-button {
+                transition: none;
+            }
+        }
+
+      
+
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-page">
+
+    <!-- ===== NAVBAR ===== -->
+
+    <header class="dashboard-navbar">
+
+        <a href="index.html" class="dashboard-logo">
+            🎓 Student <span>Career Hub</span>
+        </a>
+
+        <nav class="dashboard-nav" aria-label="Dashboard navigation">
+
+            <a href="index.html">Home</a>
+
+            <a href="jobs.html">Jobs</a>
+
+            <a href="internship.html">Internships</a>
+
+            <a href="resume.html">Resume Builder</a>
+
+            <a href="index.html"
+               class="dashboard-logout"
+               onclick="return confirm('Are you sure you want to logout?')">
+                Logout ↗
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- ===== WELCOME SECTION ===== -->
+
+        <section class="dashboard-welcome">
+
+            <div class="welcome-text">
+
+                <div class="welcome-label">
+                    YOUR CAREER • YOUR FUTURE
+                </div>
+
+                <h1>
+                    Welcome Back,<br>
+                    <span id="studentName">Student!</span> ✨
+                </h1>
+
+                <p>
+                    Your career journey continues here.<br>
+                    Track your progress, explore new opportunities,
+                    and take the next step towards your dream career.
+                </p>
+
+            </div>
+
+            <div class="welcome-decoration" aria-hidden="true">
+                🎓
+            </div>
+
+        </section>
+
+
+        <!-- ===== CAREER ACTIVITIES ===== -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-section-heading">
+
+                <div>
+                    <h2>My Career Activities</h2>
+
+                    <p>
+                        Keep track of your jobs, internships and resume.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-cards">
+
+                <!-- SAVED JOBS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-icon icon-purple">
+                        💼
+                    </div>
+
+                    <h3>Saved Jobs</h3>
+
+                    <div class="dashboard-card-number" id="savedJobsCount">0</div>
+
+                    <p>
+                        Your saved job opportunities will appear here
+                        when the save feature is connected.
+                    </p>
+
+                   <a href="saved-jobs.html" class="dashboard-card-link">
+    View Saved Jobs →
+</a>
+
+                </article>
+
+
+                <!-- APPLIED JOBS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-icon icon-pink">
+                        📩
+                    </div>
+
+                    <h3>Applied Jobs</h3>
+
+                    <div class="dashboard-card-number" id="appliedJobsCount">0</div>
+
+                    <p>
+                        Track your submitted job applications
+                        when application tracking is available.
+                    </p>
+
+                   <a href="applied-jobs.html" class="dashboard-card-link">
+    View My Applications →
+</a>
+                </article>
+
+
+                <!-- INTERNSHIP APPLICATIONS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-icon icon-blue">
+                        🎯
+                    </div>
+
+                    <h3>Internship Applications</h3>
+
+                   <div class="dashboard-card-number" id="internshipCount">0</div>
+
+                    <p>
+                        Keep track of your internship applications
+                        and discover learning opportunities.
+                    </p>
+
+                    <a href="internship.html" class="dashboard-card-link">
+                        Find Internships →
+                    </a>
+                        <a href="applied-internships.html">
+    Applied Internships
+</a>
+
+                </article>
+
+
+                <!-- RESUME STATUS -->
+
+                <article class="dashboard-card">
+
+                    <div class="card-icon icon-cyan">
+                        📄
+                    </div>
+
+                    <h3>Resume Status</h3>
+
+                    <div class="dashboard-card-number" id="resumeStatus">
+    Not Created Yet
+</div>
+
+                    <p>
+                        Create a professional resume to showcase
+                        your education, skills and projects.
+                    </p>
+
+                    <a href="resume.html" class="dashboard-card-link">
+                        Build Resume →
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===== RECOMMENDED OPPORTUNITIES AND RESUME ===== -->
+
+        <section class="dashboard-bottom-grid">
+
+            <!-- RECOMMENDED OPPORTUNITIES -->
+
+            <div class="dashboard-panel">
+
+                <h2>✨ Recommended Opportunities</h2>
+
+                <p class="panel-description">
+                    Explore opportunities related to your technical
+                    interests and career goals.
+                </p>
+
+
+                <article class="opportunity-item">
+
+                    <div class="opportunity-icon">
+                        ☕
+                    </div>
+
+                    <div class="opportunity-info">
+
+                        <h3>Java Developer</h3>
+
+                        <p>
+                            Develop your Java, OOP, SQL and
+                            application development skills.
+                        </p>
+
+                        <a href="jobs.html" class="opportunity-link">
+                            Explore Jobs →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="opportunity-item">
+
+                    <div class="opportunity-icon">
+                        💻
+                    </div>
+
+                    <div class="opportunity-info">
+
+                        <h3>Full Stack Developer</h3>
+
+                        <p>
+                            Explore frontend and backend development
+                            and learn to build web applications.
+                        </p>
+
+                        <a href="jobs.html" class="opportunity-link">
+                            Explore Opportunities →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <article class="opportunity-item">
+
+                    <div class="opportunity-icon">
+                        🌐
+                    </div>
+
+                    <div class="opportunity-info">
+
+                        <h3>Web Development Internship</h3>
+
+                        <p>
+                            Practise HTML, CSS and JavaScript
+                            through practical web projects.
+                        </p>
+
+                        <a href="internship.html" class="opportunity-link">
+                            Find Internships →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- RESUME STATUS PANEL -->
+
+            <div class="dashboard-panel">
+
+                <h2>📄 Build Your Resume</h2>
+
+                <p class="panel-description">
+                    Make your skills and academic projects stand out
+                    with a professional resume.
+                </p>
+
+
+                <div class="resume-status-box">
+
+                    <div class="resume-status-label">
+                        CURRENT RESUME STATUS
+                    </div>
+
+                    <div class="resume-status-value">
+                        Not Created Yet
+                    </div>
+
+                    <p>
+                        Start preparing your resume for job applications
+                        and internship opportunities.
+                    </p>
+
+                    <a href="resume.html" class="resume-button">
+                        Open Resume Builder →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+
+    <footer class="dashboard-footer">
+
+        <p>
+            © 2026 <span>Student Career Hub</span>.
+            Your future starts with your next step.
+        </p>
+
+    </footer>
+
+</div>
+
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Check login
+    if (typeof isLoggedIn !== "function" || !isLoggedIn()) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Student name
+    const nameElement = document.getElementById("studentName");
+
+    if (nameElement && typeof getStudentName === "function") {
+        nameElement.textContent = getStudentName() + "!";
+    }
+
+    // Read data belonging to the logged-in user
+    const savedJobs = getUserData("savedJobs", []);
+    const appliedJobs = getUserData("appliedJobs", []);
+    const appliedInternships = getUserData("appliedInternships", []);
+
+    // Update saved jobs count
+    const savedJobsCount = document.getElementById("savedJobsCount");
+
+    if (savedJobsCount) {
+        savedJobsCount.textContent = Array.isArray(savedJobs)
+            ? savedJobs.length
+            : 0;
+    }
+
+    // Update applied jobs count
+    const appliedJobsCount = document.getElementById("appliedJobsCount");
+
+    if (appliedJobsCount) {
+        appliedJobsCount.textContent = Array.isArray(appliedJobs)
+            ? appliedJobs.length
+            : 0;
+    }
+
+    // Update internship applications count
+    const internshipCount = document.getElementById("internshipCount");
+
+    if (internshipCount) {
+        internshipCount.textContent = Array.isArray(appliedInternships)
+            ? appliedInternships.length
+            : 0;
+    }
+const resume = getUserData("studentResume", null);
+const resumeCreated = getUserData("resumeCreated", false);
+
+const statusText =
+    resumeCreated === true && resume !== null
+        ? "Created ✅"
+        : "Not Created Yet";
+
+const resumeStatus = document.getElementById("resumeStatus");
+if (resumeStatus) {
+    resumeStatus.textContent = statusText;
+}
+
+const lowerResumeStatus =
+    document.getElementById("resume-status-value");
+
+if (lowerResumeStatus) {
+    lowerResumeStatus.textContent = statusText;
+}
+    
+});
+</script>
+
+</body>
+</html>
+
+

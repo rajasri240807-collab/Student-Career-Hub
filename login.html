@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+            🎓 Student Career Hub
+        </div>
+
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="jobs.html">Jobs</a>
+            <a href="internship.html">Internships</a>
+            <a href="resume-builder.html">Resume Builder</a>
+            <a href="profile.html">Profile</a>
+        </nav>
+
+        <div class="auth">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="register.html" class="register-btn">Register</a>
+        </div>
+
+    </header>
+
+    <!-- LOGIN SECTION -->
+    <main class="login-section">
+
+        <div class="login-content">
+
+            <p class="login-tagline">
+                YOUR CAREER • YOUR FUTURE
+            </p>
+
+            <h1>
+                Welcome <span>Back.</span>
+            </h1>
+
+            <p class="login-description">
+                Continue your career journey with Student
+                Career Hub. Find opportunities, build your
+                resume and grow your future.
+            </p>
+
+        </div>
+
+        <!-- LOGIN CARD -->
+        <div class="login-card">
+
+            <div class="login-circle">
+                🎓
+            </div>
+
+            <h2>Welcome Back!</h2>
+
+            <p class="login-subtitle">
+                Login to your account
+            </p>
+
+            <form id="loginForm" autocomplete="off">
+
+                <!-- EMAIL -->
+                <div class="input-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="login_email"
+                        placeholder="Enter your email"
+                        autocomplete="off"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        required
+                    >
+
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="password-field">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="login_password"
+                            placeholder="Enter your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            aria-label="Show password"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- REMEMBER ME AND FORGOT PASSWORD -->
+                <div class="login-options">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+                        Remember me
+                    </label>
+
+                    <a href="#" id="forgotPassword">
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+                <!-- ERROR MESSAGE -->
+                <p
+                    id="loginMessage"
+                    role="alert"
+                    aria-live="polite"
+                    style="display:none; margin:10px 0; color:#ffb4c8;"
+                ></p>
+
+                <!-- LOGIN BUTTON -->
+                <button
+                    type="submit"
+                    class="main-login-btn"
+                    id="loginButton"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <p class="create-account">
+                Don't have an account?
+                <a href="register.html">Create Account</a>
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h3>🎓 Student Career Hub</h3>
+
+        <p>Your career journey starts here.</p>
+
+        <p class="copyright">
+            © 2026 Student Career Hub. All Rights Reserved.
+        </p>
+
+    </footer>
+
+    <!-- LOGIN JAVASCRIPT -->
+    <script src="script.js"></script>
+
+    <script>
+        // Clear login fields when the login page opens.
+        // This helps prevent previously typed values from remaining visible.
+        window.addEventListener("pageshow", function () {
+            const emailInput = document.getElementById("email");
+            const passwordInput = document.getElementById("password");
+
+            emailInput.value = "";
+            passwordInput.value = "";
+        });
+
+        // Show/hide password
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+
+        togglePassword.addEventListener("click", function () {
+            const isPassword = passwordInput.type === "password";
+
+            passwordInput.type = isPassword ? "text" : "password";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                isPassword ? "Hide password" : "Show password"
+            );
+        });
+
+        // Login form
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+        const loginButton = document.getElementById("loginButton");
+
+        loginForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            loginMessage.style.display = "none";
+            loginMessage.textContent = "";
+
+            if (!email || !password) {
+                showLoginMessage("Please enter your email and password.");
+                return;
+            }
+
+            loginButton.disabled = true;
+            loginButton.textContent = "Logging in...";
+
+            try {
+                const response = await fetch(
+                    "http://localhost:8080/api/auth/login",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+                const message = await response.text();
+
+                if (response.ok && message.trim() === "Login successful!") {
+
+                    // Keep only a temporary login flag.
+                    // Do not store the password.
+                    sessionStorage.setItem("isLoggedIn", "true");
+
+                    // Clear any old session email.
+                    sessionStorage.removeItem("userEmail");
+
+                    // Do not save credentials in localStorage.
+                    window.location.replace("dashboard.html");
+
+                } else {
+                    showLoginMessage("Invalid email or password.");
+
+                    passwordInput.value = "";
+                    passwordInput.focus();
+                }
+
+            } catch (error) {
+                console.error("Login error:", error);
+
+                showLoginMessage(
+                    "Unable to connect to the server. Please make sure Spring Boot is running."
+                );
+
+            } finally {
+                loginButton.disabled = false;
+                loginButton.textContent = "Login";
+            }
+        });
+
+        function showLoginMessage(message) {
+            loginMessage.textContent = message;
+            loginMessage.style.display = "block";
+        }
+
+        // Prevent the form from storing credentials through this page's
+        // Remember me checkbox. Browser password managers are controlled
+        // separately through the browser settings.
+        document.getElementById("rememberMe").checked = false;
+
+        // Forgot password placeholder
+        document.getElementById("forgotPassword").addEventListener(
+            "click",
+            function (event) {
+                event.preventDefault();
+                showLoginMessage(
+                    "Password recovery is not configured yet. Please contact the administrator."
+                );
+            }
+        );
+    </script>
+
+</body>
+</html>
+

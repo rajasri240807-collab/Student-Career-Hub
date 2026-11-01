@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Internship Application | Student Career Hub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+    
+    .application-page {
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .application-container {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 35px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(192,132,252,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg,#c084fc,#f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #d0cde0;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .selected-internship {
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            background: rgba(192,132,252,0.12);
+            border: 1px solid rgba(192,132,252,0.3);
+        }
+
+        .selected-internship p {
+            margin-top: 8px;
+            color: #e9b7ff;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f0e7ff;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid rgba(192,132,252,0.35);
+            border-radius: 10px;
+            background: #302344;
+            color: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #f472b6;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #d0cde0;
+        }
+
+        .form-group select option {
+            background: #302344;
+            color: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg,#a855f7,#ec4899);
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 10px;
+            color: #e9b7ff;
+            text-decoration: none;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .success {
+            color: #86efac;
+        }
+
+        .error {
+            color: #fda4af;
+        }
+
+        @media (max-width: 600px) {
+            .application-container {
+                padding: 22px;
+            }
+        }
+
+       
+/* Fix text visibility while typing */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    color: #ffffff !important;
+    background-color: #302344 !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #f472b6 !important;
+}
+
+/* Fix text when selecting or highlighting */
+.form-group input::selection,
+.form-group textarea::selection {
+    background-color: #a855f7 !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Fix browser autofill text and background */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #302344 inset !important;
+    caret-color: #f472b6 !important;
+}
+
+/* Placeholder should remain light purple */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #d0cde0 !important;
+    -webkit-text-fill-color: #d0cde0 !important;
+    opacity: 1;
+}
+
+/* Dropdown options */
+.form-group select option {
+    background-color: #302344 !important;
+    color: #ffffff !important;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+<main class="application-page">
+
+    <section class="application-container">
+
+        <a href="internship.html" class="back-link">
+            ← Back to Internships
+        </a>
+
+        <h1>Internship <span>Application ✨</span></h1>
+
+        <p class="subtitle">
+            Complete the form below to submit your internship application.
+        </p>
+
+        <div class="selected-internship">
+            <strong>Selected Internship</strong>
+            <p id="internshipName">Loading internship...</p>
+            <p id="organizationName"></p>
+        </div>
+
+        <form id="applicationForm">
+
+            <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" required
+                       placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" required
+                       placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" required
+                       pattern="[0-9]{10}" maxlength="10"
+                       inputmode="numeric"
+                       placeholder="Enter 10-digit phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="qualification">Qualification *</label>
+                <select id="qualification" required>
+                    <option value="">Select Qualification</option>
+                    <option value="BCA">BCA</option>
+                    <option value="B.Sc Computer Science">B.Sc Computer Science</option>
+                    <option value="B.E / B.Tech">B.E / B.Tech</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="skills">Technical Skills *</label>
+                <input type="text" id="skills" required
+                       placeholder="Example: Java, HTML, CSS, SQL">
+            </div>
+
+            <div class="form-group">
+                <label for="reason">Why do you want this internship? *</label>
+                <textarea id="reason" required
+                          placeholder="Describe your interest and learning goals"></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                Submit Application →
+            </button>
+
+        </form>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+    </section>
+
+</main>
+
+<!-- Load shared login and storage functions -->
+<script src="script.js"></script>
+
+<script>
+    const internships = {
+        "web-intern": {
+            title: "Web Development Intern",
+            organization: "Sample Organization"
+        },
+        "java-intern": {
+            title: "Java Development Intern",
+            organization: "Sample Organization"
+        },
+        "database-intern": {
+            title: "Database Intern",
+            organization: "Sample Organization"
+        }
+    };
+
+    const internshipId =
+        new URLSearchParams(window.location.search).get("internship");
+
+    const selectedInternship = internships[internshipId];
+
+    const form = document.getElementById("applicationForm");
+    const message = document.getElementById("message");
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = type;
+    }
+
+    // Check login and selected internship
+    if (typeof isLoggedIn !== "function" || !isLoggedIn()) {
+        form.hidden = true;
+
+        showMessage(
+            "Please log in before applying.",
+            "error"
+        );
+
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1500);
+
+    } else if (!selectedInternship) {
+        form.hidden = true;
+
+        document.getElementById("internshipName").textContent =
+            "No valid internship selected.";
+
+        document.getElementById("organizationName").textContent =
+            "Please return to the internships page.";
+
+        showMessage("Please select an internship.", "error");
+
+    } else {
+        document.getElementById("internshipName").textContent =
+            selectedInternship.title;
+
+        document.getElementById("organizationName").textContent =
+            selectedInternship.organization;
+
+        // Check applications belonging to this logged-in user
+        const previousApplications =
+            getUserData("appliedInternships", []);
+
+        if (Array.isArray(previousApplications) &&
+            previousApplications.some(item => item.id === internshipId)) {
+
+            form.hidden = true;
+
+            showMessage(
+                "You have already applied for this internship. 💜",
+                "error"
+            );
+        }
+    }
+
+    // Save only when the student submits the form
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        if (typeof isLoggedIn !== "function" || !isLoggedIn()) {
+            showMessage("Please log in again.", "error");
+            return;
+        }
+
+        if (!selectedInternship) {
+            showMessage("Please select a valid internship.", "error");
+            return;
+        }
+
+        let applications = getUserData("appliedInternships", []);
+
+        if (!Array.isArray(applications)) {
+            applications = [];
+        }
+
+        // Prevent duplicate applications
+        if (applications.some(item => item.id === internshipId)) {
+            form.hidden = true;
+
+            showMessage(
+                "You have already applied for this internship. 💜",
+                "error"
+            );
+
+            return;
+        }
+
+        const application = {
+            id: internshipId,
+            title: selectedInternship.title,
+            organization: selectedInternship.organization,
+            applicationId: "INT-" + Date.now(),
+            fullName: document.getElementById("fullName").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            phone: document.getElementById("phone").value.trim(),
+            qualification: document.getElementById("qualification").value,
+            skills: document.getElementById("skills").value.trim(),
+            reason: document.getElementById("reason").value.trim(),
+            applicationDate: new Date().toLocaleDateString(),
+            status: "Submitted"
+        };
+
+        applications.push(application);
+
+        // Save using the current user's storage key
+        setUserData("appliedInternships", applications);
+
+        // Verify that the application was saved
+        const savedApplications =
+            getUserData("appliedInternships", []);
+
+        const saved = Array.isArray(savedApplications) &&
+            savedApplications.some(
+                item => item.applicationId === application.applicationId
+            );
+
+        if (!saved) {
+            showMessage(
+                "Unable to save. Please try again.",
+                "error"
+            );
+            return;
+        }
+
+        form.hidden = true;
+
+        showMessage(
+            "Application submitted successfully! 💜 " +
+            "Application ID: " + application.applicationId,
+            "success"
+        );
+    });
+</script>
+
+</body>
+</html>
+

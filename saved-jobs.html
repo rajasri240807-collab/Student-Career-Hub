@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Saved Jobs | Student Career Hub</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #090b20;
+    }
+
+    .saved-page {
+        min-height: 100vh;
+        padding: 40px 7%;
+        color: white;
+        background:
+            radial-gradient(
+                circle at 15% 20%,
+                rgba(129, 66, 255, 0.20),
+                transparent 35%
+            ),
+            radial-gradient(
+                circle at 85% 75%,
+                rgba(236, 72, 153, 0.14),
+                transparent 35%
+            ),
+            linear-gradient(135deg, #090b20, #15112f, #0a1028);
+    }
+
+    .saved-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 35px;
+    }
+
+    .saved-header h1 {
+        margin: 0;
+        font-size: clamp(27px, 4vw, 38px);
+    }
+
+    .saved-header h1 span {
+        color: #d18bff;
+    }
+
+    .back-link {
+        color: #e1b7ff;
+        text-decoration: none;
+    }
+
+    .saved-intro {
+        color: #c9c5dc;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+
+    .saved-summary {
+        padding: 20px;
+        margin-bottom: 25px;
+        border: 1px solid rgba(190, 130, 255, 0.3);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .saved-summary strong {
+        color: #e4b8ff;
+        font-size: 25px;
+    }
+
+    .saved-list {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(250px, 1fr));
+        gap: 22px;
+    }
+
+    .saved-card {
+        padding: 25px;
+        border: 1px solid rgba(190, 130, 255, 0.3);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .saved-card:hover {
+        transform: translateY(-5px);
+        border-color: #d18bff;
+    }
+
+    .saved-card h2 {
+        color: #e4b8ff;
+        margin-top: 0;
+        margin-bottom: 12px;
+    }
+
+    .saved-card p {
+        color: #d0cde0;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    .saved-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        margin: 8px 0;
+        border-radius: 20px;
+        background: rgba(190, 130, 255, 0.15);
+        color: #e4b8ff;
+        font-size: 13px;
+    }
+
+    .remove-btn {
+        width: 100%;
+        margin-top: 15px;
+        padding: 12px;
+        border: 1px solid #ff8dbb;
+        border-radius: 10px;
+        background: transparent;
+        color: #ffacd0;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .remove-btn:hover {
+        background: linear-gradient(90deg, #a855f7, #ec4899);
+        color: white;
+    }
+
+    .empty-state {
+        grid-column: 1 / -1;
+        padding: 40px 20px;
+        text-align: center;
+        border: 1px dashed rgba(190, 130, 255, 0.4);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .empty-state h2 {
+        color: #e4b8ff;
+    }
+
+    .empty-state p {
+        color: #c9c5dc;
+        line-height: 1.8;
+    }
+
+    .explore-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 12px 20px;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #a855f7, #ec4899);
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .saved-footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #aaa7ca;
+        font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+        .saved-page {
+            padding: 25px 16px;
+        }
+
+        .saved-header {
+            align-items: flex-start;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .saved-card {
+            transition: none;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<main class="saved-page">
+
+
+<header class="saved-header">
+    <h1>My <span>Saved Jobs 💜</span></h1>
+
+    <a href="dashboard.html" class="back-link">
+        ← Back to Dashboard
+    </a>
+</header>
+
+<p class="saved-intro">
+    Keep your favourite career opportunities in one place.
+    Review your saved jobs and decide which opportunity to explore next.
+</p>
+
+<section class="saved-summary">
+    Total Saved Jobs:
+    <strong id="savedCount">0</strong>
+</section>
+
+<section
+    class="saved-list"
+    id="savedJobsList"
+    aria-live="polite"
+>
+</section>
+
+<footer class="saved-footer">
+    © 2026 Student Career Hub. Your future starts here. ✨
+</footer>
+
+
+</main>
+
+
+<script src="script.js"></script>
+
+<script>
+    const jobDetails = {
+        java: {
+            title: "Java Developer",
+            company: "Example Company",
+            skills: "Java, OOP, SQL",
+            type: "Full-time · Entry-level"
+        },
+
+        fullstack: {
+            title: "Full Stack Developer",
+            company: "Example Company",
+            skills: "HTML, CSS, JavaScript, Java",
+            type: "Full-time · Entry-level"
+        },
+
+        web: {
+            title: "Web Developer",
+            company: "Example Company",
+            skills: "HTML, CSS, JavaScript",
+            type: "Entry-level"
+        }
+    };
+
+    const savedJobsList = document.getElementById("savedJobsList");
+    const savedCount = document.getElementById("savedCount");
+
+    // Get saved jobs for the currently logged-in user
+    function getSavedJobs() {
+        if (!isLoggedIn()) {
+            window.location.href = "login.html";
+            return [];
+        }
+
+        return getUserData("savedJobs", []);
+    }
+
+    function updateSavedJobs() {
+        const savedJobs = getSavedJobs();
+
+        savedCount.textContent = savedJobs.length;
+        savedJobsList.replaceChildren();
+
+        if (savedJobs.length === 0) {
+            const emptyState = document.createElement("div");
+            emptyState.className = "empty-state";
+
+            const heading = document.createElement("h2");
+            heading.textContent = "No Saved Jobs Yet 💼";
+
+            const message = document.createElement("p");
+            message.textContent =
+                "Explore available jobs and save the opportunities you like.";
+
+            const link = document.createElement("a");
+            link.href = "jobs.html";
+            link.className = "explore-btn";
+            link.textContent = "Explore Jobs →";
+
+            emptyState.append(heading, message, link);
+            savedJobsList.appendChild(emptyState);
+
+            return;
+        }
+
+        savedJobs.forEach(savedJob => {
+            const details = jobDetails[savedJob.id] || savedJob;
+
+            const card = document.createElement("article");
+            card.className = "saved-card";
+
+            const title = document.createElement("h2");
+            title.textContent = details.title || "Job Opportunity";
+
+            const company = document.createElement("p");
+            company.textContent =
+                "Company: " + (details.company || "Not specified");
+
+            const skills = document.createElement("p");
+            skills.textContent =
+                "Skills: " + (details.skills || "Not specified");
+
+            const badge = document.createElement("span");
+            badge.className = "saved-badge";
+            badge.textContent =
+                details.type || "Career Opportunity";
+
+            const removeButton = document.createElement("button");
+            removeButton.className = "remove-btn";
+            removeButton.textContent = "♡ Remove Saved Job";
+
+            removeButton.addEventListener("click", () => {
+                const updatedJobs = getSavedJobs().filter(
+                    job => job.id !== savedJob.id
+                );
+
+                setUserData("savedJobs", updatedJobs);
+
+                updateSavedJobs();
+
+                alert("Saved job removed successfully! 💜");
+            });
+
+            card.append(
+                title,
+                company,
+                skills,
+                badge,
+                removeButton
+            );
+
+            savedJobsList.appendChild(card);
+        });
+    }
+
+    updateSavedJobs();
+</script>
+
+
+</body>
+</html>
