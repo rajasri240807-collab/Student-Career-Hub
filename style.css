@@ -1429,3 +1429,32 @@ background-clip: text;
         color: white !important;
     }
 }
+
+    /* FINAL FIX - HOMEPAGE LOGIN AND REGISTER */
+
+@media screen and (max-width: 900px) {
+body:has(.hero) .header .auth {
+display: flex !important;
+position: static !important;
+visibility: visible !important;
+opacity: 1 !important;
+width: 100% !important;
+height: auto !important;
+justify-content: center !important;
+align-items: center !important;
+flex-wrap: wrap !important;
+gap: 12px !important;
+order: 4;
+}
+
+
+body:has(.hero) .header .auth a {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 10px 20px !important;
+    color: white !important;
+}
+
+}
+
