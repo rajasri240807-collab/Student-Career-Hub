@@ -1408,3 +1408,24 @@ background-clip: text;
         font-size: 14px;
     }
 }
+    /* FIX HOMEPAGE LOGIN AND REGISTER BUTTONS */
+
+@media screen and (max-width: 900px) {
+
+    body:has(section.hero) header.header .auth {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        order: 4;
+    }
+
+    body:has(section.hero) header.header .auth a {
+        display: inline-block !important;
+        visibility: visible !important;
+        color: white !important;
+    }
+}
