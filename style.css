@@ -409,31 +409,12 @@ nav a:hover {
 }
 
 
-
-
 /* MOBILE */
 
 @media (max-width: 900px) {
 
-    body:has(.hero) .header {
-        height: auto;
-        min-height: 75px;
-        padding: 15px 5%;
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-
-    body:has(.hero) nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        width: 100%;
-        order: 3;
-    }
-
-    body:has(.hero) nav a {
-        font-size: 14px;
+    nav {
+        display: none;
     }
 
     .hero {
@@ -453,6 +434,7 @@ nav a:hover {
     }
 }
 
+
 @media (max-width: 600px) {
 
     .hero h1 {
@@ -463,13 +445,11 @@ nav a:hover {
         grid-template-columns: 1fr;
     }
 
-   body:has(section.hero) .auth {
-    display: flex !important;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-    order: 4;
+    .auth {
+        display: none;
+    }
 }
+
 @media (max-width: 900px) {
 
     .hero {
@@ -1378,83 +1358,3 @@ background-clip: text;
 .register-terms input {
     accent-color: #a855f7;
 }
-/* FIX: Homepage mobile navigation */
-
-@media screen and (max-width: 900px) {
-
-    body:has(section.hero) header.header {
-        height: auto !important;
-        min-height: 75px;
-        padding: 15px !important;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 18px;
-    }
-
-    body:has(section.hero) header.header nav {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        flex-basis: 100%;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        order: 3;
-    }
-
-    body:has(section.hero) header.header nav a {
-        display: inline-block !important;
-        color: #c9bfdc !important;
-        font-size: 14px;
-    }
-}
-    /* FIX HOMEPAGE LOGIN AND REGISTER BUTTONS */
-
-@media screen and (max-width: 900px) {
-
-    body:has(section.hero) header.header .auth {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        order: 4;
-    }
-
-    body:has(section.hero) header.header .auth a {
-        display: inline-block !important;
-        visibility: visible !important;
-        color: white !important;
-    }
-}
-
-    /* FINAL FIX - HOMEPAGE LOGIN AND REGISTER */
-
-@media screen and (max-width: 900px) {
-body:has(.hero) .header .auth {
-display: flex !important;
-position: static !important;
-visibility: visible !important;
-opacity: 1 !important;
-width: 100% !important;
-height: auto !important;
-justify-content: center !important;
-align-items: center !important;
-flex-wrap: wrap !important;
-gap: 12px !important;
-order: 4;
-}
-
-
-body:has(.hero) .header .auth a {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    padding: 10px 20px !important;
-    color: white !important;
-}
-
-}
-
