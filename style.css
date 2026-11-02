@@ -23,6 +23,331 @@ body {
 
     background: #100b20;
 
+    /* =====================================
+LOGIN & REGISTER PAGE CSS FIX
+===================================== */
+
+body.login-page {
+min-height: 100vh;
+margin: 0;
+background:
+radial-gradient(
+circle at 15% 20%,
+rgba(124, 58, 237, 0.20),
+transparent 30%
+),
+radial-gradient(
+circle at 85% 75%,
+rgba(219, 39, 119, 0.18),
+transparent 30%
+),
+linear-gradient(
+135deg,
+#120d24,
+#21123d,
+#35145a
+);
+color: white;
+}
+
+/* Header */
+body.login-page .header {
+width: 100%;
+min-height: 75px;
+height: auto;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 15px;
+padding: 15px 5%;
+}
+
+/* Navigation */
+body.login-page .header nav {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 20px;
+}
+
+body.login-page .header nav a {
+color: #c9bfdc;
+text-decoration: none;
+}
+
+/* Login and Register buttons */
+body.login-page .header .auth {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+body.login-page .header .auth a {
+display: inline-block;
+padding: 10px 16px;
+border-radius: 8px;
+text-decoration: none;
+}
+
+/* Main section */
+body.login-page .login-section {
+min-height: 75vh;
+padding: 60px 6%;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 60px;
+box-sizing: border-box;
+}
+
+/* Left content */
+body.login-page .login-content {
+width: 100%;
+max-width: 500px;
+}
+
+body.login-page .login-tagline {
+color: #d8a7ff;
+font-size: 12px;
+letter-spacing: 3px;
+margin-bottom: 18px;
+}
+
+body.login-page .login-content h1 {
+font-size: 48px;
+line-height: 1.2;
+margin-bottom: 20px;
+}
+
+body.login-page .login-content h1 span {
+display: block;
+background: linear-gradient(90deg, #c084fc, #f472b6);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+body.login-page .login-description {
+color: #c8bfd5;
+font-size: 16px;
+line-height: 1.7;
+}
+
+/* Login and Register card */
+body.login-page .login-card {
+width: 100%;
+max-width: 390px;
+flex-shrink: 0;
+padding: 32px;
+box-sizing: border-box;
+background: rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(255, 255, 255, 0.16);
+border-radius: 22px;
+box-shadow: 0 25px 70px rgba(0, 0, 0, 0.30);
+text-align: center;
+}
+
+body.login-page .login-circle {
+width: 62px;
+height: 62px;
+margin: 0 auto 16px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 28px;
+border-radius: 18px;
+background: rgba(192, 132, 252, 0.20);
+}
+
+body.login-page .login-card h2 {
+font-size: 27px;
+margin-bottom: 8px;
+}
+
+body.login-page .login-subtitle {
+color: #bcb1c8;
+font-size: 14px;
+margin-bottom: 28px;
+}
+
+/* Form fields */
+body.login-page .input-group {
+text-align: left;
+margin-bottom: 18px;
+}
+
+body.login-page .input-group label {
+display: block;
+color: #e3d9eb;
+font-size: 13px;
+font-weight: 600;
+margin-bottom: 8px;
+}
+
+body.login-page .input-group input {
+width: 100%;
+padding: 13px 14px;
+box-sizing: border-box;
+border-radius: 9px;
+border: 1px solid rgba(255, 255, 255, 0.22);
+background: rgba(255, 255, 255, 0.07);
+color: white;
+font-size: 14px;
+}
+
+body.login-page .input-group input::placeholder {
+color: #bcb1c8;
+}
+
+/* Password field */
+body.login-page .password-field {
+position: relative;
+}
+
+body.login-page .password-field input {
+padding-right: 45px;
+}
+
+body.login-page .password-field button {
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+border: none;
+background: transparent;
+color: white;
+cursor: pointer;
+}
+
+/* Options and terms */
+body.login-page .login-options {
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 10px;
+margin-bottom: 22px;
+font-size: 12px;
+color: #bcb1c8;
+}
+
+body.login-page .login-options a,
+body.login-page .create-account a {
+color: #d8a7ff;
+text-decoration: none;
+}
+
+body.login-page .register-terms {
+text-align: left;
+margin-bottom: 20px;
+font-size: 12px;
+color: #bcb1c8;
+}
+
+body.login-page .register-terms label {
+display: flex;
+align-items: center;
+gap: 7px;
+}
+
+/* Submit button */
+body.login-page .main-login-btn {
+width: 100%;
+padding: 14px;
+border: none;
+border-radius: 9px;
+color: white;
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+background: linear-gradient(135deg, #7c3aed, #db2777);
+}
+
+body.login-page .create-account {
+margin-top: 22px;
+color: #c8bfd5;
+font-size: 13px;
+line-height: 1.6;
+}
+
+/* Footer */
+body.login-page footer {
+padding: 25px 15px;
+text-align: center;
+color: #c8bfd5;
+line-height: 1.8;
+}
+
+body.login-page footer h3 {
+color: white;
+}
+
+body.login-page footer .copyright {
+font-size: 12px;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 900px) {
+body.login-page .header {
+justify-content: center;
+}
+
+
+body.login-page .header nav {
+    width: 100%;
+    order: 2;
+}
+
+body.login-page .header .auth {
+    width: 100%;
+    order: 3;
+    justify-content: center;
+}
+
+body.login-page .login-section {
+    flex-direction: column;
+    gap: 35px;
+    padding: 45px 6%;
+}
+
+body.login-page .login-content {
+    text-align: center;
+}
+
+body.login-page .login-content h1 {
+    font-size: 40px;
+}
+
+body.login-page .login-card {
+    max-width: 420px;
+}
+
+
+}
+
+@media screen and (max-width: 500px) {
+body.login-page .header nav {
+gap: 12px;
+}
+
+
+body.login-page .header nav a {
+    font-size: 13px;
+}
+
+body.login-page .login-content h1 {
+    font-size: 34px;
+}
+
+body.login-page .login-card {
+    padding: 25px 20px;
+}
+
+
+}
+
+
     border-bottom: 1px solid #29213c;
 }
 
