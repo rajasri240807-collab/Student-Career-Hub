@@ -471,7 +471,7 @@
             <a href="index.html">Home</a>
             <a href="jobs.html">Jobs</a>
             <a href="internship.html">Internships</a>
-            <a href="resume-builder.html">Resume Builder</a>
+            <a href="resume.html">Resume Builder</a>
             <a href="index.html" class="dashboard-logout">Logout ↗</a>
         </div>
     </nav>
@@ -535,21 +535,24 @@
     const container = document.getElementById("applicationsContainer");
     const countElement = document.getElementById("countElement");
 
-    // Read applications from localStorage
-    function readApplications() {
-        try {
-            const storedApplications =
-                localStorage.getItem("appliedInternships");
+   // Read applications for the currently logged-in user
+function readApplications() {
+    try {
+        if (typeof isLoggedIn === "function" && isLoggedIn() &&
+            typeof getUserData === "function") {
 
-            const applications = JSON.parse(storedApplications || "[]");
+            const applications =
+                getUserData("appliedInternships", []);
 
             return Array.isArray(applications) ? applications : [];
-
-        } catch (error) {
-            console.error("Error reading applications:", error);
-            return [];
         }
+
+        return [];
+    } catch (error) {
+        console.error("Error reading applications:", error);
+        return [];
     }
+}
 
     // Safely display text
     function safeText(value) {
